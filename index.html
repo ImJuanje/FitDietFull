@@ -45,11 +45,8 @@ body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:
 .hd{display:flex;align-items:center;gap:14px;margin:4px 0 20px}.lg{width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#2f7d4f,#6fd49a);display:grid;place-items:center;font-size:26px;box-shadow:0 8px 20px -8px rgba(47,125,79,.7)}.hd h1{font-size:28px;letter-spacing:-.02em;margin:0}.hd .sub{margin:2px 0 0}
 aside,main{min-width:0}
 @media(min-width:960px){.w{padding:28px 32px}.lay{display:grid;grid-template-columns:370px 1fr;gap:28px;align-items:start}aside{position:sticky;top:20px}}
-@media(min-width:700px){#mn{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;align-items:start}.day{margin-bottom:0}}
 .c{border-radius:20px;box-shadow:0 10px 30px -16px rgba(0,0,0,.25)}
-.day{background:var(--card);border:1px solid var(--bd);border-radius:22px;padding:14px;margin-bottom:14px;box-shadow:0 10px 30px -16px rgba(0,0,0,.25);animation:up .35s both}
 @keyframes up{from{opacity:0;transform:translateY(8px)}}
-.day .c{background:var(--bg);box-shadow:none;border:0;border-radius:14px;margin:0 0 8px;padding:10px 12px}
 .dyh{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 10px}.dyh small{font-weight:500;font-size:12px;color:var(--mu)}
 .go{background:linear-gradient(135deg,#2f7d4f,#3fa66b);box-shadow:0 8px 18px -8px rgba(47,125,79,.7);transition:transform .15s}.go:hover{transform:translateY(-1px)}
 .chip{transition:all .15s}.chip:hover{transform:translateY(-1px)}
@@ -82,11 +79,69 @@ mark{background:#fff3a3;color:#1d1d1b;border-radius:4px;padding:0 3px}
 .ph{position:absolute;right:-14px;bottom:-34px;width:23%;max-width:220px;border:5px solid #1d1d1b;border-radius:28px;overflow:hidden;background:#1d1d1b;box-shadow:0 30px 60px -20px rgba(0,0,0,.5)}.ph img{display:block;width:100%;height:auto}
 @media(max-width:760px){.shots{margin-bottom:40px}.ph{right:-6px;bottom:-22px;width:30%;border-width:4px;border-radius:20px}}
 #sa{font-size:13px;font-weight:700;color:var(--ac)}
-.day.today{border-color:var(--ac);box-shadow:0 0 0 1px var(--ac),0 10px 30px -16px rgba(0,0,0,.25)}
 :focus-visible{outline:2px solid var(--ac);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 #ts{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--tx);color:var(--bg);padding:11px 16px;border-radius:14px;font-weight:600;font-size:14px;opacity:0;pointer-events:none;transition:all .25s;z-index:1100;max-width:calc(100% - 32px);text-align:center}#ts.on{opacity:1;transform:translate(-50%,0)}
 .ft{font-size:12px;color:var(--mu);margin:16px 0 24px}
+
+/* ===== v2: menú por días, semana y layout responsive ===== */
+@media(min-width:1200px){.w{max-width:1480px}}
+@media(min-width:960px){aside{max-height:calc(100vh - 40px);max-height:calc(100dvh - 40px);overflow:auto;scrollbar-width:thin;padding:0 2px 2px}}
+#sb .row{grid-template-columns:repeat(auto-fit,minmax(140px,1fr))}
+main{display:flex;flex-direction:column}main>*{min-width:0}
+#tcd{order:1}#cp{order:2}.nav{order:3}#qn{order:4}#mn{order:5}#ls{order:6}
+@media(max-width:959px){#cp{order:7;margin-top:12px}}
+#ls{width:100%;max-width:760px;align-self:center}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin:0 -16px 12px;padding:8px 16px 6px;background:var(--bg);background:color-mix(in srgb,var(--bg) 90%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+@media(min-width:960px){.nav{margin:0 0 12px;padding:6px 0}}
+@media(max-height:480px){.nav{position:static}}
+.nav .tabs{margin-bottom:8px}.nav .tabs:last-child{margin-bottom:0}
+.tabs button{min-height:44px}
+.ds{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.ds button{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:50px;padding:6px 0;border:1px solid var(--bd);border-radius:12px;background:var(--card);color:var(--tx);font:inherit;font-weight:700;font-size:13px;cursor:pointer}
+.ds small{font-size:11px;font-weight:600;color:var(--mu)}
+.ds .on{background:var(--ac);border-color:var(--ac);color:#fff}.ds .on small{color:rgba(255,255,255,.88)}
+.ds .td::after,.ds .wn::before{content:"";position:absolute;top:5px;width:6px;height:6px;border-radius:50%}
+.ds .td::after{right:5px;background:var(--ac)}.ds .on.td::after{background:#fff}
+.ds .wn::before{left:5px;background:var(--bad)}.ds .on.wn::before{background:#ffd2cc}
+#mn{container-type:inline-size}
+.dv{max-width:780px;margin:0 auto;animation:up .25s both}
+.dh{display:flex;align-items:center;justify-content:center;gap:12px;margin:2px 0 12px}
+.dh h2{margin:0;font-size:22px;letter-spacing:-.02em;display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;min-width:0}
+.nv{width:44px;height:44px;flex:none;border-radius:14px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font-size:24px;line-height:1;cursor:pointer}
+.dsum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.dsum div{background:var(--ac2);border-radius:14px;padding:10px 4px;text-align:center;min-width:0}
+.dsum b{display:block;font-size:15px;white-space:nowrap}.dsum small{display:block;color:var(--mu);font-size:11px}.dsum .no b{color:var(--bad)}
+.dml{display:grid;gap:8px}
+.ml{display:flex;gap:10px;align-items:center;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:10px 10px 10px 12px;box-shadow:0 6px 18px -14px rgba(0,0,0,.3)}
+.me{font-size:26px;width:32px;text-align:center;flex:none}
+.mt{flex:1;min-width:0;cursor:pointer;border-radius:10px}.mt:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
+.mk{font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--ac)}
+.mk::after{content:" ▾";opacity:.6}.ml.open .mk::after{content:" ▴"}
+.mt .nm{line-height:1.25}.mt .ig{margin-top:2px}
+.mx{display:none;margin-top:8px;padding-top:8px;border-top:1px dashed var(--bd);font-size:13px;color:var(--mu);line-height:1.5}.ml.open .mx{display:block}
+.ml .sw{width:44px;height:44px;flex:none;border-radius:14px}
+.empty{text-align:center;color:var(--mu)}
+.wk{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));animation:up .25s both}
+.wd{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:8px;display:flex;flex-direction:column;gap:4px;min-width:0}
+.wd.td{border-color:var(--ac);box-shadow:0 0 0 1px var(--ac)}
+.wh{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border:0;background:none;color:var(--tx);font:inherit;padding:6px 6px 8px;cursor:pointer;text-align:left;min-height:44px}
+.wh b{font-size:16px}.wh small{color:var(--mu);font-size:12px}.wh .s{display:none}
+.wc{display:flex;gap:8px;align-items:flex-start;text-align:left;width:100%;border:0;background:var(--bg);color:var(--tx);font:inherit;font-size:14px;line-height:1.3;padding:9px 10px;border-radius:12px;cursor:pointer;min-height:44px}.wc span{flex:none}
+@container (min-width:880px){
+ .dv{max-width:none;display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:0 20px;align-items:start}
+ .dh{grid-column:1/-1}
+ .dml{grid-column:1;grid-row:2}
+ .dsum{grid-column:2;grid-row:2;grid-template-columns:1fr 1fr;position:sticky;top:140px}
+ .dsum b{font-size:20px}.dsum small{font-size:12px}.dsum div{padding:14px 6px}
+}
+@container (min-width:780px){
+ .wk{grid-template-columns:repeat(7,minmax(0,1fr));grid-template-rows:repeat(6,auto);gap:0 8px}
+ .wd{grid-row:span 6;display:grid;grid-template-rows:subgrid;row-gap:4px;padding:6px}
+ .wh{flex-direction:column;align-items:flex-start;gap:0;min-height:0}.wh .f{display:none}.wh .s{display:inline}
+ .wc{flex-direction:column;gap:2px;font-size:12.5px;padding:7px 8px;min-height:84px}.wc span{font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style></head><body><div id="ap"><div class="w">
 <header class="hd"><div class="lg">🛒</div><div><h1>FitDiet</h1><p class="sub">Tu menú, tu objetivo y tu súper. Todo calculado.</p></div></header><div class="lay"><aside>
 <div class="c"><div class="tot" style="cursor:pointer" onclick="S.sc=!S.sc;draw()"><b id="sh"></b><span id="sa"></span></div><div id="sb"><p class="lb" style="margin-top:12px">Supermercado</p><div class="chips" id="sm"></div>
@@ -97,8 +152,8 @@ mark{background:#fff3a3;color:#1d1d1b;border-radius:4px;padding:0 3px}
 <button class="go" id="gb" onclick="gn()">Generar menú nuevo</button></div></div>
 <button class="gk" style="margin-bottom:12px;background:var(--card)" onclick="fbc()" id="fb"></button>
 </aside><main><div id="cp"></div>
-<div class="c"><div class="tot"><span id="tt"></span><span id="bd"></span></div><div class="pg"><i id="pb"></i></div><div class="tot" style="margin-top:12px;font-size:15px;flex-wrap:wrap;gap:4px"><span id="tc"></span><span id="tcs"></span></div></div>
-<div class="tabs"><button id="t1" onclick="tb('m')">Menú</button><button id="t2" onclick="tb('l')">Lista de la compra</button></div>
+<div class="c" id="tcd"><div class="tot"><span id="tt"></span><span id="bd"></span></div><div class="pg"><i id="pb"></i></div><div class="tot" style="margin-top:12px;font-size:15px;flex-wrap:wrap;gap:4px"><span id="tc"></span><span id="tcs"></span></div></div>
+<div class="nav" id="nav"><div class="tabs" role="tablist"><button id="t1" role="tab" onclick="tb('m')">Día</button><button id="t3" role="tab" onclick="tb('w')">Semana</button><button id="t2" role="tab" onclick="tb('l')">🛒 Compra</button></div><div id="dsb"></div></div>
 <div id="qn" class="ig" style="margin:-4px 2px 10px"></div><div id="mn"></div><div id="ls" class="c"></div>
 </main></div><p class="ft">Los precios son orientativos y no son precios reales en directo. Las calorías y los macros son estimaciones y no sustituyen a un dietista. Los tiempos de cocina son orientativos.</p>
 <div class="lgl"></div><p class="cp">© 2026 FitDiet</p>
@@ -164,7 +219,7 @@ const R=[
 const DY=['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'];
 let S={sm:'Mercadona',p:2,b:80,d:0,m:[],ck:{},tab:'m',g:1,sx:0,ed:30,pe:75,al:175,ac:1.375,ex:[],cc:false,sc:false,tm:'d',tv:60,pl:'free',sw:0,wk:''};
 try{const x=JSON.parse(localStorage.getItem('mw')||'null');if(x&&x.m)S=Object.assign(S,x)}catch(e){}
-try{if(!localStorage.getItem('mw')&&innerWidth<700)S.sc=true}catch(e){}
+try{if(!localStorage.getItem('mw')&&innerWidth<700)S.sc=S.cc=true}catch(e){}
 const WK=()=>{const d=new Date(),t=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())),n=t.getUTCDay()||7;t.setUTCDate(t.getUTCDate()+4-n);const y=new Date(Date.UTC(t.getUTCFullYear(),0,1));return t.getUTCFullYear()+'-'+Math.ceil(((t-y)/864e5+1)/7)};
 if(S.wk!=WK()){S.wk=WK();S.sw=0}
 const $=id=>document.getElementById(id),sv=()=>{try{localStorage.setItem('mw',JSON.stringify(S))}catch(e){}if(CL){clearTimeout(TM);TM=setTimeout(()=>CL.set({s:JSON.stringify(S)}).catch(()=>{}),600)}};
@@ -259,6 +314,30 @@ function pk(t){const P=sh(pool(t=='m'?'c':t)),o=[];for(let i=0;i<7&&P.length;i++
 function swp(t,n){if(!sq())return;const a=AR(t),P=pool(t=='m'?'c':t).filter(x=>!a.includes(x)&&!(t=='m'&&x==S.m[n])&&okw(a,n,x));if(!P.length){toast('No hay otro plato que quepa en tu tiempo ⏱');return}a[n]=P[Math.random()*P.length|0];qc();draw()}
 function rw(t,n){const a=AR(t),i=a&&a[n];if(i===undefined)return'';return `<div class="c d"><div><div class="dy">${LB[t]}</div><div class="nm">${R[i].n}</div><div class="ig">${inf(i)}</div></div><button class="sw" title="Cambiar" aria-label="Cambiar plato" onclick="swp('${t}',${n})">${sb()}</button></div>`}
 function dk(n){const a=[S.mb&&S.mb[n],S.ma&&S.ma[n],S.mm&&S.mm[n],S.mk&&S.mk[n],S.m[n]].filter(x=>x!==undefined);return [can('goal')?Math.round(a.reduce((s,i)=>s+nu(i)[0]*sc(i),0))+' kcal · '+Math.round(a.reduce((s,i)=>s+nu(i)[1]*sc(i),0))+' g prot.':null,can('time')?'⏱ '+dt(n)+' min':null,eu(a.reduce((s,i)=>s+pc(i),0))].filter(Boolean).join(' · ')}
+
+/* ===== v2: vistas Día / Semana ===== */
+const SLT=[['d','☀️','Desayuno'],['a','🥪','Almuerzo'],['m','🍽️','Comida'],['s','🍎','Snack'],['c','🌙','Cena']],D3=['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'];
+let DS=TD;
+const gm=(t,n)=>t=='c'?S.m[n]:(AR(t)||[])[n];
+const fh=m=>m>=60?Math.floor(m/60)+'h'+String(m%60).padStart(2,'0'):m+' min';
+const dsx=n=>{const a=SLT.map(([t])=>gm(t,n)).filter(i=>i!==undefined);return{k:Math.round(a.reduce((x,i)=>x+nu(i)[0]*sc(i),0)),p:Math.round(a.reduce((x,i)=>x+nu(i)[1]*sc(i),0)),t:dt(n),c:a.reduce((x,i)=>x+pc(i),0),o:S.tm=='d'&&dt(n)>S.tv}};
+function mealRow(t,n){const i=gm(t,n);if(i===undefined)return'';const [,e,l]=SLT.find(x=>x[0]==t),k=Math.round(nu(i)[0]*sc(i)),p=Math.round(nu(i)[1]*sc(i)),ing=Object.keys(R[i].i).map(q=>C[q][0].toLowerCase()).join(', ');
+ return `<div class="ml"><div class="me" aria-hidden="true">${e}</div><div class="mt" role="button" tabindex="0" aria-expanded="false" onclick="tgl(this)" onkeydown="if(event.key=='Enter'||event.key==' '){event.preventDefault();tgl(this)}"><div class="mk">${l}</div><div class="nm">${R[i].n}</div><div class="ig">${k} kcal · ${p} g prot. · ⏱ ${R[i].k} min · ${eu(pc(i))}</div><div class="mx"><b>Ingredientes:</b> ${ing}<br>${eu(pc(i))} para ${S.p} ${S.p>1?'personas':'persona'} · ${k} kcal y ${p} g de proteína por ración</div></div><button class="sw" title="Cambiar plato" aria-label="Cambiar ${l.toLowerCase()}" onclick="${t=='c'?'swap('+n+')':'swp(\''+t+'\','+n+')'}">🔄</button></div>`}
+function tgl(e){const o=e.closest('.ml').classList.toggle('open');e.setAttribute('aria-expanded',o)}
+function dayView(n){const st=dsx(n);
+ return `<div class="dv"><div class="dh"><button class="nv" aria-label="Día anterior" onclick="gd(-1)">‹</button><h2>${DY[n]}${n==TD?' <span class="lkb">Hoy</span>':''}</h2><button class="nv" aria-label="Día siguiente" onclick="gd(1)">›</button></div><div class="dsum"><div><b>${st.k}</b><small>kcal/persona</small></div><div><b>${st.p} g</b><small>proteína</small></div><div class="${st.o?'no':''}"><b>${fh(st.t)}</b><small>${st.o?'⚠ supera tu límite':'cocinando'}</small></div><div><b>${eu(st.c)}</b><small>${S.p>1?'para '+S.p+' personas':'1 persona'}</small></div></div><div class="dml">${SLT.map(([t])=>mealRow(t,n)).join('')}</div></div>`}
+function weekView(){return `<div class="wk">${DA.map(n=>{const st=dsx(n);return `<section class="wd${n==TD?' td':''}"><button class="wh" onclick="sd(${n},1)" aria-label="Ver ${DY[n]}"><b><span class="f">${DY[n]}</span><span class="s">${D3[n]}</span>${n==TD?' <span class="lkb">Hoy</span>':''}</b><small>${st.k} kcal · ${Math.round(st.c)} €</small></button>${SLT.map(([t,e])=>{const i=gm(t,n);return i===undefined?'<div></div>':`<button class="wc" onclick="sd(${n},1)"><span aria-hidden="true">${e}</span>${R[i].n}</button>`}).join('')}</section>`}).join('')}</div>`}
+function dayStrip(){return `<div class="ds" role="tablist" aria-label="Días de la semana">${DA.map(n=>{const st=dsx(n);return `<button role="tab" aria-selected="${n==DS}" aria-label="${DY[n]}" class="${n==DS?'on':''}${n==TD?' td':''}${st.o?' wn':''}" onclick="sd(${n})"><span>${D3[n]}</span><small>${Math.round(st.c)} €</small></button>`}).join('')}</div>`}
+function rn(){const t=S.tab;[['t1','m'],['t3','w'],['t2','l']].forEach(([id,k])=>{const b=$(id);b.className=t==k?'on':'';b.setAttribute('aria-selected',t==k)});
+ $('dsb').innerHTML=t=='m'&&S.m.length?dayStrip():'';
+ $('mn').style.display=t=='l'?'none':'';$('ls').style.display=t=='l'?'block':'none';
+ $('mn').innerHTML=t=='l'?'':!S.m.length?'<div class="c empty">No hay platos que encajen con tus exclusiones. Quita alguna en «Alimentos».</div>':t=='w'?weekView():dayView(DS)}
+function sd(n,sc2){DS=n;S.tab='m';draw();if(sc2)$('nav').scrollIntoView({behavior:'smooth',block:'start'})}
+function gd(d){DS=(DS+d+7)%7;draw()}
+{let X=0,Y=0;const m=$('mn');
+ m.addEventListener('touchstart',e=>{const t=e.changedTouches[0];X=t.clientX;Y=t.clientY},{passive:true});
+ m.addEventListener('touchend',e=>{if(S.tab!='m')return;const t=e.changedTouches[0],dx=t.clientX-X,dy=t.clientY-Y;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.6)gd(dx<0?1:-1)},{passive:true});
+ document.addEventListener('keydown',e=>{if(S.tab!='m'||e.target.closest('input,select,textarea')||document.querySelector('.mo.on'))return;if(e.key=='ArrowLeft')gd(-1);else if(e.key=='ArrowRight')gd(1)})}
 function md(v){$('mo').classList.toggle('on',!!v)}
 function md2(v){$('mo2').classList.toggle('on',!!v);if(v)exr();else gen()}
 function tx(id){S.ex=S.ex.includes(id)?S.ex.filter(x=>x!=id):S.ex.concat(id);exr()}
@@ -291,9 +370,8 @@ function draw(){
  {const w=wt(),od=DA.filter(n=>dt(n)>S.tv),okT=S.tm=='d'?!od.length:w<=S.tv;
  $('tc').parentNode.style.display=can('time')?'':'none';$('tc').textContent='⏱ Cocinas '+ft(w)+' esta semana';
  $('tcs').innerHTML=okT?'<span class="ok">Dentro de tu tiempo ✓</span>':'<span class="no">'+(S.tm=='d'?od.length+(od.length>1?' días superan':' día supera')+' tu límite':'+'+ft(w-S.tv)+' sobre tu tiempo')+'</span>'}
- $('t1').className=S.tab=='m'?'on':'';$('t2').className=S.tab=='l'?'on':'';
- $('mn').style.display=S.tab=='m'?'':'none';$('ls').style.display=S.tab=='l'?'block':'none';
- $('mn').innerHTML=S.m.map((i,n)=>`<section class="day${n==TD?' today':''}"><div class="dyh"><span>${DY[n]}${n==TD?' <span class="lkb" style="margin-left:6px">Hoy</span>':''}</span><small>${dk(n)}</small></div>${rw('d',n)}${rw('a',n)}${rw('m',n)}${rw('s',n)}<div class="c d"><div><div class="dy">🌙 Cena</div><div class="nm">${R[i].n}</div><div class="ig">${Object.keys(R[i].i).map(k=>C[k][0].toLowerCase()).join(', ')}</div><div class="ig">${[can('goal')?Math.round(nu(i)[0]*sc(i))+' kcal · '+Math.round(nu(i)[1]*sc(i))+' g proteína por ración':null,can('time')?'⏱ '+R[i].k+' min':null].filter(Boolean).join(' · ')}</div><div class="ig">${eu(pc(i))} para ${S.p} ${S.p>1?'personas':'persona'}</div></div><button class="sw" title="Cambiar plato" aria-label="Cambiar plato" onclick="swap(${n})">${sb()}</button></div></section>`).join('');
+ rn();
+
  const A={};al().forEach(i=>{for(const[k,q]of Object.entries(R[i].i))A[k]=(A[k]||0)+q*S.p*sc(i)});
  let h='<div class="chips" style="margin-bottom:6px"><button class="chip" onclick="cl(0)">📋 Copiar lista</button><button class="chip" onclick="cl(1)">💬 Enviar por WhatsApp</button></div>',done=0;
  SEC.forEach((s,si)=>{const ks=Object.keys(A).filter(k=>C[k][3]==si);if(!ks.length)return;h+=`<p class="lb" style="margin-top:10px">${s}</p>`;
